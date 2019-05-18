@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer:
 --
--- Create Date:   16:29:33 05/15/2019
+-- Create Date:   11:57:29 05/16/2019
 -- Design Name:   
--- Module Name:   C:/e/EmbebidosPro/tst8.vhd
+-- Module Name:   C:/e/EmbebidosPro/tst11.vhd
 -- Project Name:  EmbebidosPro
 -- Target Device:  
 -- Tool versions:  
@@ -32,10 +32,10 @@ USE ieee.std_logic_1164.ALL;
 -- arithmetic functions with Signed or Unsigned values
 --USE ieee.numeric_std.ALL;
  
-ENTITY tst8 IS
-END tst8;
+ENTITY tst11 IS
+END tst11;
  
-ARCHITECTURE behavior OF tst8 IS 
+ARCHITECTURE behavior OF tst11 IS 
  
     -- Component Declaration for the Unit Under Test (UUT)
  
@@ -54,6 +54,7 @@ ARCHITECTURE behavior OF tst8 IS
          Cont : OUT  std_logic_vector(5 downto 0);
          MAXXX : OUT  std_logic_vector(7 downto 0);
          POSM : OUT  std_logic_vector(2 downto 0);
+         repeat : OUT  std_logic_vector(2 downto 0);
          Tiempo : OUT  std_logic_vector(5 downto 0)
         );
     END COMPONENT;
@@ -75,6 +76,7 @@ ARCHITECTURE behavior OF tst8 IS
    signal Cont : std_logic_vector(5 downto 0);
    signal MAXXX : std_logic_vector(7 downto 0);
    signal POSM : std_logic_vector(2 downto 0);
+   signal repeat : std_logic_vector(2 downto 0);
    signal Tiempo : std_logic_vector(5 downto 0);
 
    -- Clock period definitions
@@ -97,6 +99,7 @@ BEGIN
           Cont => Cont,
           MAXXX => MAXXX,
           POSM => POSM,
+          repeat => repeat,
           Tiempo => Tiempo
         );
 
@@ -113,25 +116,54 @@ BEGIN
    -- Stimulus process
    stim_proc: process
    begin		
-     wait for 10 ns;	
-
-       WCF <="00011001";
-       WOU <= "01001011";
-       WFC <= "00011001";
-       WUO <= "00011001";
-		CLK<='1';
-		wait for 400 ns;	
-
-       WCF <="00011001";
-       WOU <= "01001011";
-       WFC <= "00011001";
-       WUO <= "00011001";
-		CLK<='1';
-
+      -- hold reset state for 100 ns.
       
+       WCF <="00011001";
+       WOU <= "00011001";
+       WFC <= "00011001";
+       WUO <= "00011001";
+		CLK<='1';
+		wait for 50 ns;	
 
+       WCF <="00011001";
+       WOU <= "00110010";
+       WFC <= "00011001";
+       WUO <= "00011001";
+		CLK<='1';
+---De aqui funciona bien
+		wait for 120 ns;	
+
+       WCF <="01100100";
+       WOU <= "00011001";
+       WFC <= "00011001";
+       WUO <= "00011001";
+		CLK<='1';
+      
+		wait for 120 ns;	
+
+       WCF <="01100100";
+       WOU <= "00011001";
+       WFC <= "00011001";
+       WUO <= "00011001";
+		CLK<='1';
+      
+		
+		wait for 120 ns;	
+
+       WCF <="00011001";
+       WOU <= "00011001";
+       WFC <= "01100100";
+       WUO <= "00011001";
+		CLK<='1';
+		
+		wait for 120 ns;	
+
+       WCF <="00011001";
+       WOU <= "00011001";
+       WFC <= "00011001";
+       WUO <= "00011001";
+		CLK<='1';
       wait;
    end process;
 
 END;
-
